@@ -52,6 +52,22 @@ function Sidebar() {
               <i className='bi bi-book'></i>
               <span className="d-none d-md-inline">Manage Book</span>
             </ListGroup.Item>
+             <ListGroup.Item
+              as={NavLink}
+              to="/discount"
+              className="d-flex align-items-center gap-2">
+              <i className='bi bi-book'></i>
+              <span className="d-none d-md-inline">ManageDiscout</span>
+            </ListGroup.Item>
+            {/* <ListGroup.Item
+                as={NavLink}
+                 to="/timeslot"
+                  className="d-flex align-items-center gap-2"
+>
+                      <i className="bi bi-clock"></i>
+                     <span className="d-none d-md-inline">Time Slot</span>
+                         </ListGroup.Item> */}
+
 
 
             {/* <ListGroup.Item

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { Container, Row, Col, Table, Button, Form, Pagination } from 'react-bootstrap'
 import axios from "axios"
+
 const apiUrl = import.meta.env.VITE_API_URL
 function BookList() {
     let [books, setBooks] = useState([])
@@ -51,6 +52,9 @@ function BookList() {
             alert(err)
         })
     }, [isDelete, searchBook, pageNo])
+    function handleView(id) {
+    navigate('/view/book/' + id)
+}
     return (
         <Container>
             <Row>
@@ -87,8 +91,31 @@ function BookList() {
                                         <td>{book.nop}</td>
                                         <td>{book.publication}</td>
                                         <td>
-                                            <Button variant="danger" size="sm" onClick={() => handleDelete(book._id)}>Delete</Button>
-                                            <Button variant="warning" size="sm" className="ms-1" onClick={() => handleUpdate(book._id)}>Edit</Button>
+                                            <Button
+                                           variant="danger"
+                                                size="sm"
+                                                 onClick={() => handleDelete(book._id)}
+                                                        > <i className="bi bi-trash"></i>
+                                                        
+                                                       </Button>
+
+                                              <Button
+                                                  variant="warning"
+                                                     size="sm"
+                                                     className="ms-1"
+                                                     onClick={() => handleUpdate(book._id)}
+                                                        > <i className="bi bi-pencil"></i>
+                                                          
+                                                    </Button>
+
+                                                      <Button
+                                                          variant="info"
+                                                            size="sm"
+                                                            className="ms-1"
+                                                             onClick={() => handleView(book._id)}
+                                                              >
+                                                          <i className="bi bi-eye"></i>
+                                                          </Button>
                                         </td>
                                     </tr>
                                 )

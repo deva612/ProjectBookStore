@@ -54,6 +54,7 @@ async function getBookForEdit(req,res) {
     }
     
 }
+
 async function editBook(req,res){
     try {
         let id = req.params.id;
@@ -68,10 +69,40 @@ async function editBook(req,res){
         res.status(400).send({ success: false})
     }
 }
+async function getBookById(req, res) {
+    try {
+        let id = req.params.id;
+
+        console.log("Book ID:", id);
+
+        let book = await Book.findOne({ _id: id });
+
+        if (!book) {
+            return res.status(404).send({
+                success: false,
+                message: "Book not found"
+            });
+        }
+
+        res.status(200).send({
+            success: true,
+            data: book
+        });
+
+    } catch (err) {
+        console.log(err);
+
+        res.status(400).send({
+            success: false,
+            message: err.message
+        });
+    }
+}
 module.exports = {
     addBook,
     getBooks,
     deleteBook,
     getBookForEdit,
+    getBookById,
     editBook
 }
