@@ -1,10 +1,11 @@
 import { Container,Row ,Col,Form, Button } from "react-bootstrap"
 import { useEffect, useState } from "react"
-
+import { useNavigate } from "react-router-dom"
 import axios from "axios"
 const apiUrl = import.meta.env.VITE_API_URL
 
 function CreateDiscount() {
+    const navigate = useNavigate();
     let [books, setBooks] = useState([])
     let [book, setBook] = useState('')
     let [discountName, setDiscountName] = useState('')
@@ -40,6 +41,7 @@ function CreateDiscount() {
             data: data
         }).then((res)=>{
             alert("Discount has been added successfully......")
+            navigate('/discount')
         }).catch((err)=>{
             alert(err)
         })
@@ -63,7 +65,7 @@ function CreateDiscount() {
                         <option>----Select-----</option>
                         {
                             books.map((book)=>
-                                <option value={book._id}>{book.bookTitle}</option>
+                                <option key={book._id} value={book._id}>{book.bookTittle || book.bookTitle}</option>
                             
                             )
                         }

@@ -63,7 +63,7 @@ function BookPageForView() {
 
                                     <img
                                         src={book.bookImage}
-                                        alt={book.bookTitle}
+                                        alt={book.bookTittle || book.bookTitle}
                                         className="img-fluid rounded"
                                         style={{
                                             maxHeight: "300px",
@@ -77,7 +77,7 @@ function BookPageForView() {
                                 <Col md={8}>
 
                                     <h2 className="text-primary">
-                                        {book.bookTitle}
+                                        {book.bookTittle || book.bookTitle}
                                     </h2>
 
                                     <hr />
@@ -93,7 +93,7 @@ function BookPageForView() {
                                         <strong>
                                             <i className="bi bi-currency-rupee"></i> Price:
                                         </strong>{" "}
-                                        ₹{book.price}
+                                        ₹{book.originalPrice ?? book.price}
                                     </p>
 
                                     <p>
@@ -108,7 +108,7 @@ function BookPageForView() {
 
                                     <p>
                                         <strong>Publication:</strong>{" "}
-                                        {book.publication}
+                                        {book.publicationYear || book.publication}
                                     </p>
 
                                 </Col>

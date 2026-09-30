@@ -7,5 +7,6 @@ const discountSchema = new Schema({
     discountValue: { type: Number,default: 0, required: true },
     validFrom: { type: Date , required: true },
     validTo: { type: Date , required: true },
+    status: { type: String, default: 'Active', enum: ['Active','InActive'] }
 },{timestamps: true})
 module.exports = mongoose.model('Discount', discountSchema)

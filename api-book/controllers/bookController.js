@@ -21,9 +21,16 @@ const addBook = async (req, res) => {
 
 async function getBooks(req, res){
     try {
-        let totalBooks = await Book.countDocuments({});
+        const searchRegex = new RegExp(req.query.searchBook || "", "i");
+        const bookFilter = {
+            $or: [
+                { bookTittle: searchRegex },
+                { bookTitle: searchRegex }
+            ]
+        };
+        let totalBooks = await Book.countDocuments(bookFilter);
         console.log(totalBooks, 'totalbooks');
-        let books = await Book.find({ bookTitle: new RegExp(req.query.searchBook,"i")}).skip((req.query.pageNo-1) * (req.query.booksPerPage)).limit(req.query.booksPerPage);
+        let books = await Book.find(bookFilter).skip((req.query.pageNo-1) * (req.query.booksPerPage)).limit(req.query.booksPerPage);
         res.status(200).send({ data: books, totalBooks: totalBooks })
     } catch (err) {
         console.log(err);
@@ -37,19 +44,19 @@ async function deleteBook(req,res){
         await Book.deleteOne({_id: id});
         res.status(200).send({ success: true})
     } catch (err) {
-        console.log(err)
+        
         res.status(400).send({ success: false})
     }
 }
 async function getBookForEdit(req,res) {
     try {
         let id = req.params.id;
-        console.log(id)
+        
         let book =await Book.findOne({ _id: id });
-        console.log(book)
+        
         res.status(200).send({ data: book })
     } catch (err) {
-        console.log(err)
+        
         res.status(400).send({ data: err })
     }
     
@@ -60,12 +67,12 @@ async function editBook(req,res){
         let id = req.params.id;
         console.log(id)
         let book = req.body;
-        console.log(book)
+        
         await Book.updateOne({ _id: id}, req.body)
-        console.log("Book updated successfully...")
+        
         res.status(200).send({ success: true})
     } catch(err){
-        console.log(err)
+        
         res.status(400).send({ success: false})
     }
 }
@@ -73,7 +80,7 @@ async function getBookById(req, res) {
     try {
         let id = req.params.id;
 
-        console.log("Book ID:", id);
+        
 
         let book = await Book.findOne({ _id: id });
 
@@ -90,7 +97,7 @@ async function getBookById(req, res) {
         });
 
     } catch (err) {
-        console.log(err);
+        
 
         res.status(400).send({
             success: false,
