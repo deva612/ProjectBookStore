@@ -61,7 +61,7 @@ useEffect(()=>{
                                        <td> {discount.discountName}</td>
                                        <td> {discount.discountType}</td>
                                        <td> {discount.discountValue}</td>
-                                       <td> {discount.book?.bookTitle}</td>
+                                       <td> {discount.book?.bookTittle}</td>
                                        <td>{new Date(discount.validFrom).toLocaleDateString()}</td>
                                        <td>{new Date(discount.validTo).toLocaleDateString()}</td>
                                        {/* <td>{discount.status}</td> */}
